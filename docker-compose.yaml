@@ -12,24 +12,27 @@ services:
         source: ./client
         target: /code
     command: [ "http-server" ]
-  server:
+  api:
     image: node:12.18.4
     working_dir: /code
+    volumes:
+      - type: bind
+        source: ./api
+        target: /code
+    container_name: debug_dev_api
     ports: 
       - 3000:3000
     environment: 
       - PGUSER=futuregraph
       - PGHOST=db
-      - PGPASSWORD=dataforSQLpassword
-      - PGDATABASE=dataforSQL
+      - PGPASSWORD=librarypass
+      - PGDATABASE=library
       - PGPORT=5432
+      - NODE_ENV=development
     depends_on:
       - db
-    volumes:
-      - type: bind
-        source: ./api
-        target: /code
     command: bash -c "npm install && npm run seedDev && npm run dev"
+
 
   db:
     image: postgres:latest
