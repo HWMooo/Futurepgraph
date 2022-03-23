@@ -1,5 +1,3 @@
-const { Cookie } = require("cookiejar");
-
 const userName = document.getElementById('userArea');
 const title = document.getElementById('titleArea');
 const post = document.getElementById('postArea');
@@ -8,46 +6,53 @@ const showpost = document.getElementById('postList');
 
 
 
-button.addEventListener('click', addPosttoDbAndShow);
+button.addEventListener('click', addPosttoDb);
 
 
-async function addPosttoDbAndShow (){
-    let user = document.cookie = `username = ${userName.value}`;
-    fetch('', {
+async function addPosttoDb (){
+    document.cookie = `username=${userName.value}`;
+    fetch('http://localhost:3000', {
         method: 'POST',
         body: JSON.stringify({
-            Aname: userName.value,
-            title: title.value,
+            title: userName.value,
+            name: title.value,
             post: post.value
         }),
         headers:{
             "Content-Type": "application/json; charset=UTF-8"
         }
-    }).then(() => {
-        fetch('').then(function (response) {
-            response.json().then(function (json) {
-                for (item in json){
-                    let aPost = document.createElement('li');
-                    let text = document.createTextNode(``);
-                    aPost.append(text);
-                    showpost.appendChild(aPost);
-
-                }
-            })
-        })
     })
 
 }
 
 async function showPostsOnLoad(){
-    let user = document.cookie;
-    if(user){
+    let user = document.cookie.split("=")[1];
+    if(user !== ""){
+        //console.log(user);
+        const response = await fetch('http://localhost:3000/posts/'+user);
+        let theUserPosts = await response.json();
+        for(posts in theUserPosts){
+            let aPost = document.createElement('li');
+            let text = document.createTextNode(`${theUserPosts[posts].id}, ${theUserPosts[posts].title}, ${theUserPosts[posts].post}`);
+            aPost.append(text);
+            showpost.appendChild(aPost);
+        }
         
+
+    }else{
+        let aPost = document.createElement('li');
+        let text = document.createTextNode('No user with that name');
+        aPost.append(text);
+        showpost.appendChild(aPost);
+
+
     }
     
 
     
 }
+
+showPostsOnLoad();
 
 
 
