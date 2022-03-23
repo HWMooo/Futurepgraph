@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/style.css" />
     <script defer src='JS/script.js'></script>
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,800,800italic,900,900italic"
+        rel="stylesheet" />
     <title>FutureGraph</title>
 </head>
-<body>
-    <input id = "userArea" type="text", placeholder="enter username...">
-    <input id = "titleArea" type="text", placeholder="enter post title...">
-    <textarea id = "postArea" rows="4" cols="50" placeholder="enter post..."></textarea>
-    <button id = "submitButton" type="submit">Submit</button>
-    <ol id= "postList"></ol>
 
-    
+<body>
+    <h1 id="title">FutureGraph</h1>
+    <div id='container'>
+        <input id="userArea" type="text" , placeholder="enter username...">
+        <input id="titleArea" type="text" , placeholder="enter post title...">
+        <textarea id="postArea" rows="4" cols="50" placeholder="enter post..."></textarea>
+        <button id="submitButton" type="submit">Submit</button>
+        <ol id="postList"></ol>
+    </div>
+
+    <div id="postContainer">
+        <button type="button" class="collapsible">Open Collapsible</button>
+        <div class="content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat.</p>
+        </div>
+
+    </div>
+
+
 </body>
+
 </html>
