@@ -1,18 +1,18 @@
-const db = require ('../dbConfig')
+const db = require ('../dbConfig/init')
 
 class Post {
     constructor(data){
         this.id = data.id
         this.title = data.title
-        this.pseudonym = data.pseudonym
-        this.body = data.body
+        this.name = data.name
+        this.post = data.post
 
     }
 
     static get all() {
         return new Promise (async (resolve, reject) => {
             try {
-                const postsData = await db.query(`SELECT * FROM posts;`)
+                const postsData = await db.query(`SELECT * FROM usersAndPosts;`)
                 const posts = postsData.rows.map(d => new Post(d))
                 resolve(posts);
             } catch (err) {
@@ -24,7 +24,7 @@ class Post {
     static findById (id) {
         return new Promise (async (resolve, reject) => {
             try {
-                let postData = await db.query(`SELECT * FROM posts WHERE id = $1;`, [ id ]);
+                let postData = await db.query(`SELECT * FROM usersAndPosts WHERE id = $1;`, [ id ]);
                 let post = new Post(postData.rows[0]);
                 resolve (post);
             } catch (err) {
@@ -33,10 +33,10 @@ class Post {
         });
     }
 
-    static findByUser (pseudonym) {
+    static findByUser (name) {
         return new Promise (async (resolve, reject) => {
             try {
-                let postsData = await db.query(`SELECT * FROM posts WHERE pseudonym = $1;`, [ pseudonym ]);
+                let postsData = await db.query(`SELECT * FROM usersAndPosts WHERE name = $1;`, [ name ]);
                 const posts = postsData.rows.map(d => new Post(d))
                 resolve (posts);
             } catch (err) {
@@ -45,10 +45,10 @@ class Post {
         });
     }
 
-    static create(title, pseudonym, body){
+    static create(name, title, post){
         return new Promise (async (resolve, reject) => {
             try {
-                let postData = await db.query(`INSERT INTO posts (title, pseudonym, body) VALUES ($1, $2, $3) RETURNING *;`, [ title, pseudonym, body]);
+                let postData = await db.query(`INSERT INTO usersAndPosts (name, title, post) VALUES ($1, $2, $3) RETURNING *;`, [ name, title, post]);
                 let newPost = new Post(postData.rows[0]);
                 resolve (newPost);
             } catch (err) {

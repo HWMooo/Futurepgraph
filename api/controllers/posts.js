@@ -14,9 +14,9 @@ router.get('/posts', async (req, res) => {
 })
 
 // posts show route
-router.get('/posts/:pseudonym', async (req, res) => {
+router.get('/posts/:name', async (req, res) => {
     try {
-        const post = await Post.findByUser(parseInt(req.params.pseudonym))
+        const post = await Post.findByUser(req.params.name)
         res.json(post)
     } catch(err) {
         res.status(404).json({err})
@@ -26,7 +26,7 @@ router.get('/posts/:pseudonym', async (req, res) => {
 // Create post route
 router.post('/', async (req, res) => {
     try {
-        const post = await Post.create(req.body.title, req.body.pseudonym, req.body.body)
+        const post = await Post.create(req.body.title, req.body.name, req.body.post)
         res.json(post)
     } catch(err) {
         res.status(404).json({err})

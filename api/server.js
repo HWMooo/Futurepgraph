@@ -6,10 +6,8 @@ server.use(cors());
 server.use(express.json());
 
 const postRoutes = require('./controllers/posts')
-const userRoutes = require('./controllers/users')
 
 server.use('/', postRoutes)
-server.use('/users', userRoutes)
 
 const port = process.env.PORT || 3000;
 
