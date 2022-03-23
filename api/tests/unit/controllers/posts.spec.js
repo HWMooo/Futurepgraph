@@ -24,7 +24,7 @@ describe('posts controller', () => {
     describe('show', () => {
         test('it returns an author and their posts with a 200 status code', async () => {
             jest.spyOn(Post, 'findByUser')
-                .mockResolvedValue(new Post({ id: 1, name: 'Test User'} ));
+                .mockResolvedValue(new Post({ id: 1, title: "Test Title", name: 'Test User' } ));
             jest.spyOn(Post.prototype, 'posts', 'get')
                 .mockResolvedValue(['post1', 'post2']);
                 
@@ -33,8 +33,9 @@ describe('posts controller', () => {
             expect(mockStatus).toHaveBeenCalledWith(200);
             expect(mockJson).toHaveBeenCalledWith({
                 id: 1,
+                title: "Test Title",
                 name: 'Test User',
-                books: ['post1', 'post2']
+                posts: ['post1', 'post2']
             });
         })
     });
