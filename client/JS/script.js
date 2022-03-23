@@ -3,6 +3,9 @@ const title = document.getElementById('titleArea');
 const post = document.getElementById('postArea');
 const button = document.getElementById('submitButton');
 const showpost = document.getElementById('postList');
+let coll = document.getElementsByClassName("collapsible");
+const wherePostsContained = document.getElementById('postContainer');
+
 
 
 
@@ -33,18 +36,25 @@ async function showPostsOnLoad(){
         const response = await fetch('http://localhost:3000/posts/'+user);
         let theUserPosts = await response.json();
         for(posts in theUserPosts){
-            let aPost = document.createElement('li');
-            let text = document.createTextNode(`${theUserPosts[posts].id}, ${theUserPosts[posts].title}, ${theUserPosts[posts].post}`);
-            aPost.append(text);
-            showpost.appendChild(aPost);
+            let aTitle = document.createElement('button');
+            aTitle.classList.add("collapsible");
+            let title = document.createTextNode(`${theUserPosts[posts].title}`);
+            aTitle.append(title);
+            let postContainer = document.createElement('div');
+            postContainer.classList.add('content');
+            aTitle.append(postContainer);
+            let actualPost = document.createElement('p');
+            let postContent = document.createTextNode(`${theUserPosts[posts].post}`)
+            actualPost.append(postContent);
+            postContainer.appendChild(actualPost);
+            wherePostsContained.appendChild(aTitle);
+            coll = document.getElementsByClassName("collapsible")
+            
         }
+        
         
 
     }else{
-        let aPost = document.createElement('li');
-        let text = document.createTextNode('No user with that name');
-        aPost.append(text);
-        showpost.appendChild(aPost);
 
 
     }
@@ -55,6 +65,20 @@ async function showPostsOnLoad(){
 
 showPostsOnLoad();
 
+
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
 
 
 
