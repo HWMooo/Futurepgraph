@@ -1,4 +1,4 @@
-INSERT INTO usersAndPosts (Aname, title, post)
+INSERT INTO usersAndPosts (name, title, post)
 VALUES
 (
     'Mooman ryder',
