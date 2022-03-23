@@ -22,6 +22,7 @@ async function addPosttoDb (){
             "Content-Type": "application/json; charset=UTF-8"
         }
     })
+    setTimeout(function(){window.location.reload();},10);
 
 }
 

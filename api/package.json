@@ -1,5 +1,5 @@
 {
-  "description": "LAP 2 debug assignment",
+  "description": "Futuregraph",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
@@ -11,7 +11,7 @@
       "/node_modules/"
     ]
   },
-  "author": "futureproof",
+  "author": "Futuregraph",
   "license": "ISC",
   "devDependencies": {
     "jest": "^26.4.2",
