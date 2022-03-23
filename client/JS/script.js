@@ -16,7 +16,7 @@ async function addPosttoDbAndShow (){
     fetch('', {
         method: 'POST',
         body: JSON.stringify({
-            Aname: userName.value,
+            name: userName.value,
             title: title.value,
             post: post.value
         }),
