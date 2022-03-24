@@ -19,7 +19,7 @@ body{
 }
 
 #postContainer{
-    background-color: black;
+    transform: translateY(-12vw);
 }
 
 .collapsible {

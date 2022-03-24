@@ -13,6 +13,20 @@ button.addEventListener('click', addPosttoDb);
 
 
 async function addPosttoDb (){
+    if(userName.value === ""){
+        alert('No user input!')
+    }
+    else if(userName.value !== "" && title.value === "" && post.value === ""){
+        document.cookie = `username=${userName.value}`;
+        setTimeout(function(){window.location.reload();
+            userName.value = "";
+            title.value = "";
+            post.value = "";
+        
+        
+        },10);
+    }
+    else{
     document.cookie = `username=${userName.value}`;
     fetch('http://localhost:3000', {
         method: 'POST',
@@ -24,8 +38,19 @@ async function addPosttoDb (){
         headers:{
             "Content-Type": "application/json; charset=UTF-8"
         }
+    }).then(() => {
+        setTimeout(function(){window.location.reload();
+            userName.value = "";
+            title.value = "";
+            post.value = "";
+        
+        
+        },10);
+        
+
+
     })
-    setTimeout(function(){window.location.reload();},10);
+}
 
 }
 
@@ -48,7 +73,8 @@ async function showPostsOnLoad(){
             actualPost.append(postContent);
             postContainer.append(actualPost);
             wherePostsContained.append(aTitle);
-            console.log(coll.length)
+            wherePostsContained.append(postContainer);
+            
             
         }
 
@@ -72,7 +98,6 @@ async function showPostsOnLoad(){
 showPostsOnLoad().then(() => {
     coll = document.getElementsByClassName("collapsible")
     for (let i = 0; i < coll.length; i++) {
-        console.log("coll length here = ", coll.length)
       coll[i].addEventListener("click", function() {
         this.classList.toggle("active");
         var content = this.nextElementSibling;
