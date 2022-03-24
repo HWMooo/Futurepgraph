@@ -1,0 +1,46 @@
+body{
+    background-color: #9400FF;
+}
+
+#title{
+    color: #EA8000;
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Nunito Sans';
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+    margin: 10vw;
+    margin-top: 2vh;
+    padding: 2vw;
+}
+
+#postContainer{
+    background-color: black;
+}
+
+.collapsible {
+    background-color: #BF007F;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+  
+  .active, .collapsible:hover {
+    background-color: #D70022;
+  }
+  
+  .content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+  }
